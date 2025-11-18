@@ -1,0 +1,99 @@
+from fastapi import FastAPI, HTTPException
+import uvicorn
+from src.models import TaskModel, TaskListModel
+import src.task_service as ts
+app = FastAPI()
+
+@app.get('/', status_code = 200)
+def read_root():
+    return {'Hello': 'World'}
+
+@app.post('/tasks')
+def create_task_endpoint(task_model : TaskModel, list_name : str | None = None):
+    task = ts.create_task(task_model, list_name)
+    return task
+
+@app.get("/tasks")
+def read_tasks_endpoint():
+    return ts.get_tasks()
+
+@app.get('/tasks/{task_id}')
+def read_a_task_endpoint(task_id : int):
+    try:
+        return ts.get_task(task_id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+@app.patch("/tasks/{task_id}")
+def toggle_task_endpoint(task_id : int):
+    try:
+        return ts.toggle_task(task_id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+@app.delete('/tasks/{task_id}')
+def delete_task_endpoint(task_id : int):
+    try:
+        return ts.delete_task(task_id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+@app.post('/lists')
+def create_task_list_endpoint(task_list_model : TaskListModel):
+    task_list = ts.create_task_list(task_list_model)
+    return task_list
+
+@app.get("/lists")
+def read_a_task_lists_endpoint():
+    return ts.get_task_lists()
+
+@app.get("/lists/{task_list_name}")
+def read_a_task_list_endpoint(task_list_name : str):
+    try:
+        return ts.get_task_list(task_list_name)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    
+@app.delete('/tasks/{task_list_name}')
+def delete_task_list_endpoint(task_list_name : str):
+    try:
+        return ts.delete_task_list(task_list_name)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    
+@app.put("/tasks/ongoing")
+def read_ongoing_tasks_endpoint():
+    return ts.get_ongoing_tasks()
+
+@app.put("/tasks/finished")
+def read_completed_tasks_endpoint():
+    return ts.get_completed_tasks()
+
+@app.patch("/tasks/{task_id}")
+def update_task_endpoint(task_id : int, task_model : TaskModel):
+    try:
+        return ts.update_task(task_id, task_model)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+@app.post('/lists/{list_name}/task')
+def create_task_from_list_endpoint(list_name : str, task_model : TaskModel):
+    try:
+        task = ts.create_task(task_model, list_name)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    return task
+"""
+
+
+
+@app.patch("/tasks/task_{task_id}/list")
+def transfer_to_other_list(task_id : int, list_name : str | None = None):
+    previous_list = tasks_dict[task_id].list_name
+    if previous_list :
+        lists_tasks[previous_list].remove(task_id)
+    if list_name:
+        lists_tasks[list_name].add(task_id)
+    tasks_dict[task_id].list_name = list_name
+    return tasks_dict[task_id]
+
+    """
