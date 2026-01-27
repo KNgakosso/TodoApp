@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoApp</title>
+    <link rel="stylesheet" href="./css/base.css">
+</head>
+<body>
+    <h1>TODO</h1>
+    <div id="mainContainer">
+        <section id="leftModal">
+            <ul">
+                <li id="allTasks">Tout</li>
+                <li id="ongoing">En cours</li>
+                <li id="completed">Complétées</li>
+            </ul>
+            <ul id="listsDashboard"></ul>
+            <button id="createListButton">Nouvelle liste</button>
+            <form id="createListForm" hidden>
+                <input type="text" name="listName" placeholder="Nom de la liste" required>
+                <button id="validateCreateListButton" type="submit">Créer</button>
+                <button id="closeCreateListButton" type="button">Annuler</button>
+            </form>
+        </section>
+        <section id="middleModal">
+            <ul id="tasksDashboard"></ul>
+            <button id="createTaskButton">Nouvelle tâche</button>
+        </section>
+
+        <section id="rightModal" hidden>
+            <button id="close" type="button">Fermer</button>
+            <div id="taskDetailsView" hidden>
+                <table>
+                    <tr>
+                        <td>Titre :</td>
+                        <td><span id="detailName"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Description :</td>
+                        <td><span id="detailDescription"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Deadline :</td>
+                        <td><span id="detailDeadline"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Priorité :</td>
+                        <td><span id="detailPriority"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Complétée :</td>
+                        <td><span id="detailCompleted"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Liste :</td>
+                        <td><span id="detailListName"></span></td>
+                    </tr>
+                </table>
+                <button id="modifyTaskButton">Modifier</button>
+                <button id="deleteTaskButton">Supprimer</button>
+            </div>
+            <div id="modifyTaskView" hidden>
+                <form>
+                    <table>
+                        <tr>
+                            <td>Titre :</td>
+                            <td>
+                                <input type="text" name="taskName" placeholder="Titre"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Description :</td>
+                            <td>
+                                <input type="text" name="description" placeholder="Description"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Deadline :</td>
+                            <td>
+                                <input type="datetime" name="deadline" placeholder="Deadline"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Priorité :</td>
+                            <td>
+                                <input type="number" name="priority" placeholder="Priorité"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="submit">Valider</button>
+                    <button type="button" id="cancel">Annuler</button>
+                </form>
+            </div>
+
+            <div id="createTaskView" hidden>
+                <form>
+                    <table>
+                        <tr>
+                            <td>Titre :</td>
+                            <td>
+                                <input type="text" name="taskName" placeholder="Titre" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Description :</td>
+                            <td>
+                                <input type="text" name="description" placeholder="Description"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Deadline :</td>
+                            <td>
+                                <input type="datetime" name="deadline" placeholder="Deadline"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Priorité :</td>
+                            <td>
+                                <input type="number" name="priority" placeholder="Priorité"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Liste :</td>
+                            <td>
+                                <input type="text" name="listName" placeholder="Liste de Tâches"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="submit">Valider</button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <script type="module" src="./js/main.js"></script>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
-import src.task_service as ts
-import src.storage as st
+import task_service as ts
+import storage as st
 import pytest
 import datetime
 

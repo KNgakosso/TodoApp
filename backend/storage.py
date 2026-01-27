@@ -1,8 +1,8 @@
 from typing import Set, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from src.models import Task
-    from src.models import TaskList
+    from models import Task
+    from models import TaskList
 
 dict_tasks: dict[int, "Task"] = {}
 dict_tasks_lists :dict[str, "TaskList"] = {}

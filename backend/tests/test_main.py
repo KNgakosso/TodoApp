@@ -2,8 +2,8 @@
 
 import pytest
 from fastapi.testclient import TestClient
-from src.main import app
-import src.storage as st
+from main import app
+import storage as st
 client = TestClient(app)
 
 

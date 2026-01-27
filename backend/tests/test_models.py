@@ -1,7 +1,7 @@
-from src.models import Task, TaskModel, TaskList, TaskListModel
+from models import Task, TaskModel, TaskList, TaskListModel
 import datetime
 import pytest
-from src.utils import get_new_id
+from utils import get_new_id
 
 # TEST TASKMODEL
 #########################

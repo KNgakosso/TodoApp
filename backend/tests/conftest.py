@@ -1,9 +1,9 @@
 import pytest
 import datetime
-from src.models import Task, TaskModel, TaskList, TaskListModel
-import src.storage as storage
-import src.utils
-import src.task_service as ts
+from models import Task, TaskModel, TaskList, TaskListModel
+import storage as storage
+import utils
+import task_service as ts
 from typing import Callable
 
 @pytest.fixture

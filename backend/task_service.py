@@ -1,5 +1,5 @@
-import src.storage as st
-from src.models import Task, TaskModel, TaskListModel, TaskList
+import storage as st
+from models import Task, TaskModel, TaskListModel, TaskList
 
 def create_task(task_model : TaskModel, list_name : str | None) -> Task:
     if not isinstance(task_model, TaskModel):

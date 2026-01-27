@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 import datetime
 from pydantic import BaseModel
-from src.utils import get_new_id
+from utils import get_new_id
 
 class TaskModel(BaseModel):
     name : str

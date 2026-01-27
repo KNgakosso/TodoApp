@@ -1,8 +1,17 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-from src.models import TaskModel, TaskListModel
-import src.task_service as ts
+from models import TaskModel, TaskListModel
+import task_service as ts
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get('/', status_code = 200)
 def read_root():
@@ -44,7 +53,7 @@ def create_task_list_endpoint(task_list_model : TaskListModel):
     return task_list
 
 @app.get("/lists")
-def read_a_task_lists_endpoint():
+def read_task_lists_endpoint():
     return ts.get_task_lists()
 
 @app.get("/lists/{task_list_name}")
@@ -61,15 +70,15 @@ def delete_task_list_endpoint(task_list_name : str):
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
     
-@app.put("/tasks/ongoing")
+@app.get("/tasks/status/ongoing")
 def read_ongoing_tasks_endpoint():
     return ts.get_ongoing_tasks()
 
-@app.put("/tasks/finished")
+@app.get("/tasks/status/completed")
 def read_completed_tasks_endpoint():
     return ts.get_completed_tasks()
 
-@app.patch("/tasks/{task_id}")
+@app.put("/tasks/{task_id}")
 def update_task_endpoint(task_id : int, task_model : TaskModel):
     try:
         return ts.update_task(task_id, task_model)
