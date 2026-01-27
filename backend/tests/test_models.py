@@ -1,7 +1,7 @@
-from models import Task, TaskModel, TaskList, TaskListModel
+from backend.models import Task, TaskModel, TaskList, TaskListModel
 import datetime
 import pytest
-from utils import get_new_id
+from backend.utils import get_new_id
 
 # TEST TASKMODEL
 #########################

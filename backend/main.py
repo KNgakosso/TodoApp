@@ -1,9 +1,19 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
+import os
 import uvicorn
-from models import TaskModel, TaskListModel
-import task_service as ts
+
+import backend.task_service as ts
+from backend.models import TaskModel, TaskListModel
+
 app = FastAPI()
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # backend/
+FRONTEND_DIR = os.path.join(BASE_DIR, "../frontend")   # ../frontend par rapport à backend/
+
+app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
 app.add_middleware(
     CORSMiddleware,
@@ -13,9 +23,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get('/', status_code = 200)
+@app.get('/', response_class=HTMLResponse)
 def read_root():
-    return {'Hello': 'World'}
+    # Sert le frontend/index.html
+    index_path = os.path.join(FRONTEND_DIR, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return HTMLResponse("<h1>Frontend not found</h1>", status_code=404)
 
 @app.post('/tasks')
 def create_task_endpoint(task_model : TaskModel, list_name : str | None = None):
