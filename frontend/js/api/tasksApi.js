@@ -1,6 +1,6 @@
 export async function getTasks() {
     try {
-        const res = await fetch("http://127.0.0.1:8000/tasks")
+        const res = await fetch("/tasks")
         return await res.json();
     } catch(err) {
         console.log(err);
@@ -9,7 +9,7 @@ export async function getTasks() {
 
 export async function getOngoingTasks() {
     try {
-        const res = await fetch("http://127.0.0.1:8000/tasks/status/ongoing")
+        const res = await fetch("/tasks/status/ongoing")
         return await res.json();
     } catch(err) {
         console.log(err);
@@ -19,7 +19,7 @@ export async function getOngoingTasks() {
 
 export async function getCompletedTasks() {
     try {
-        const res = await fetch("http://127.0.0.1:8000/tasks/status/completed")
+        const res = await fetch("/tasks/status/completed")
         return await res.json();
     } catch(err) {
         console.log(err);
@@ -28,7 +28,7 @@ export async function getCompletedTasks() {
 
 export async function getTask(id) {
     try {
-        const res = await fetch(`http://127.0.0.1:8000/tasks/${id}`)
+        const res = await fetch(`/tasks/${id}`)
         return await res.json();
     } catch(err) {
         console.log(err);
@@ -37,7 +37,7 @@ export async function getTask(id) {
 export async function createTask(listName, data) {
     const params = listName ? `?list_name=${encodeURIComponent(listName)}` : "";
     try {
-        const res = await fetch(`http://127.0.0.1:8000/tasks${params}`, {
+        const res = await fetch(`/tasks${params}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -52,7 +52,7 @@ export async function createTask(listName, data) {
 
 export async function updateTask(id, data) {
     try {
-        const res = await fetch(`http://127.0.0.1:8000/tasks/${id}`, {
+        const res = await fetch(`/tasks/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -67,7 +67,7 @@ export async function updateTask(id, data) {
 
 export async function toggleTask(id) {
     try {
-        const res = await fetch(`http://127.0.0.1:8000/tasks/${id}`, {
+        const res = await fetch(`/tasks/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -81,7 +81,7 @@ export async function toggleTask(id) {
 
 export async function deleteTask(id) {
     try {
-        const res = await fetch(`http://127.0.0.1:8000/tasks/${id}`, {
+        const res = await fetch(`/tasks/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

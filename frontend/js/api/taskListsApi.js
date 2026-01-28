@@ -1,6 +1,6 @@
 export async function getTaskLists() {
     try {
-        const res = await fetch("http://127.0.0.1:8000/lists")
+        const res = await fetch("/lists")
         return await res.json();
     } catch(err) {
         console.log(err);
@@ -9,7 +9,7 @@ export async function getTaskLists() {
 
 export async function getTaskList(name) {
     try {
-        const res = await fetch(`http://127.0.0.1:8000/lists/${name}`)
+        const res = await fetch(`/lists/${name}`)
         return await res.json();
     } catch(err) {
         console.log(err);
@@ -17,7 +17,7 @@ export async function getTaskList(name) {
 }
 export async function createTaskList(data) {
     try {
-        const res = await fetch("http://127.0.0.1:8000/lists", {
+        const res = await fetch("/lists", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -32,7 +32,7 @@ export async function createTaskList(data) {
 
 export async function deleteTaskList(name) {
     try {
-        const res = await fetch(`http://127.0.0.1:8000/lists/${name}`, {
+        const res = await fetch(`/lists/${name}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -46,7 +46,7 @@ export async function deleteTaskList(name) {
 
 export async function createTaskFromTaskList(name, data) {
     try {
-        const res = await fetch(`http://127.0.0.1:8000/lists/${name}/task`, {
+        const res = await fetch(`/lists/${name}/task`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
